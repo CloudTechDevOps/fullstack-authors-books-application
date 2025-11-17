@@ -115,7 +115,7 @@ module.exports = db;
 ### Initilize the database 
 ```
 mysql -h <rdsendpoint> -u admin -p<rdspassword> < db.sql
-mysql -h database-1.cj6qigogwls0.us-east-1.rds.amazonaws.com -u admin -pveeradon < db.sql
+
 
 ```
 ### Everything is completed run the follwing commnds for backend execution
