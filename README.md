@@ -82,11 +82,6 @@ sudo dnf install -y nodejs
 ```
 ### Install pm2
 ```
-sudo npm install -g pm2
-mkdir -p ~/.npm-global
-npm config set prefix '~/.npm-global'
-export PATH="$HOME/.npm-global/bin:$PATH"
-echo 'export PATH="$HOME/.npm-global/bin:$PATH"' >> ~/.bashrc && source ~/.bashrc
 npm install -g pm2
 ```
 ### Install mysql or mariadb for database initilization
