@@ -1,9 +1,9 @@
 -- Create Database and User
-CREATE DATABASE IF NOT EXISTS react_node_app;
+CREATE DATABASE IF NOT EXISTS rds;
 
 -- Select the database to use before creating tables
 
-USE react_node_app;
+USE rds;
 
 -- Create Tables
 CREATE TABLE IF NOT EXISTS `author` ( 
