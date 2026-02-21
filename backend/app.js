@@ -18,6 +18,14 @@ db.connect((err) => {
    console.log('Connected to MySQL Database');
 });
 
+// Health / API root check
+app.get(['/api', '/api/'], (req, res) => {
+   res.status(200).json({
+      message: "API is running successfully",
+      status: "healthy"
+   });
+});
+
 // Add your routes here
 app.use('/api', routes);
 
