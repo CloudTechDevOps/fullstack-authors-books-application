@@ -127,8 +127,68 @@ npm run build
 sudo cp -r dist/* /usr/share/nginx/html
 ```
 
+# revrse proxy
+
+### if you want to use internnal loadbalncer please go through below procress
+# Reverse Proxy & Backend Setup (Amazon Linux)
+
+This repository contains an Nginx reverse-proxy configuration that serves a React frontend and proxies API requests to a backend at private IP or loadbalancer.
+
+## Behavior summary (from `proxy.conf`)
+- Listens on port 80.
+- Routes requests starting with `/api/` to private ip or loadbalncer`.
+- Serves a React single-page app from `/usr/share/nginx/html` and falls back to `index.html` for client routes.
+
+
+## Install Nginx on Amazon Linux 2
+Run the following on the public-facing EC2 (nginx) instance.
+
+### After cloneing your your config.js file url must be /api only
+once chek in your config  index.html file below one is comented or uncomented if commented please uncoment and build the package
+```
+VITE_API_URL  = "/api";  // For reverse proxy it is mandatory so dont change
+
+
+### create a proxy file and paste the file from git and chage the backend private ip if you are using internal loadbalncer change it 
+```bash
+sudo vi /etc/nginx/conf.d/reverse-proxy.conf
+```
+### paste below file and change loadbalancer url
+```
+server {
+    listen 80;
+    server_name _;
+
+    # 🔥  API reverse proxy (WITH PATH FIX)
+    location ^~ /api/ {
+        proxy_pass http://backend-loadbalncer-url;
+        proxy_http_version 1.1;
+
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # React build
+    root /usr/share/nginx/html;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}
+```
+# Verify
+2. Test and reload nginx:
+
+```bash
+sudo nginx -t
+sudo systemctl reload nginx
+```
 ### Now access the frontend with public ip 
 ### hit public ip you will get this responce 
+
 #### Dashboard
 ![Dashboard](./frontend/public/ss/dashboard.png)
 
