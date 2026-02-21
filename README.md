@@ -144,7 +144,7 @@ This repository contains an Nginx reverse-proxy configuration that serves a Reac
 Run the following on the public-facing EC2 (nginx) instance.
 
 ### After cloneing your your config.js file url must be /api only
-once chek in your config  index.html file below one is comented or uncomented if commented please uncoment and build the package
+once chek in your config  .env  file below one 
 ```
 VITE_API_URL  = "/api";  // For reverse proxy it is mandatory so dont change
 
